@@ -17,6 +17,10 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'email'    => 'required|email',
             'password' => 'required|string',
+        ], [
+            'email.required' => 'Email Tidak Boleh Kosong',
+            'email.email' => 'Email harus valid',
+            'password.required' => 'Kata Sandi Tidak Boleh Kosong',
         ]);
 
         if ($validator->fails()) {
@@ -27,7 +31,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Email atau password salah'], 401);
+            return response()->json(['message' => 'Email atau kata sandi salah'], 401);
         }
 
         // Buat token

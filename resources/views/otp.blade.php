@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,14 @@
     <style>
         /* Import Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #ECF2F3;
             color: #1A1A1A;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
         }
 
@@ -32,7 +33,7 @@
             text-align: center;
             border-radius: 10px 10px 0 0;
         }
- 
+
         .header img {
             height: 98px;
             max-width: 60%;
@@ -71,7 +72,7 @@
             margin: 0 4px;
             display: inline-block;
         }
-        
+
         hr {
             margin: 0 16px;
             border: none;
@@ -89,9 +90,9 @@
         .footer p {
             margin-bottom: 16px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -103,12 +104,12 @@
         <!-- Content -->
         <div class="content">
             <h3>Verifikasi Kode OTP untuk Registrasi Akun</h3>
-            <p>Halo, Folika Besties</p>
+            <p>Halo, {{ $name }}!</p>
             <p>Silakan masukkan kode ini untuk melanjutkan proses registrasi akun Anda. Kode OTP ini hanya berlaku selama 5 menit. Harap segera masukkan kode tersebut pada aplikasi Folika</p>
 
             <div class="otp-code">
                 @foreach (str_split($otpCode) as $digit)
-                    <div class="otp">{{ $digit }}</div>
+                <div class="otp">{{ $digit }}</div>
                 @endforeach
             </div>
 
@@ -125,4 +126,5 @@
         </div>
     </div>
 </body>
+
 </html>

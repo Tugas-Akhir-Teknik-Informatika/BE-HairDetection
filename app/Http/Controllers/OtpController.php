@@ -17,6 +17,9 @@ class OtpController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
+        ], [
+            'email.email' => 'Email harus valid',
+            'email.required' => 'Email tidak boleh kosong',
         ]);
 
         if (User::where('email', $request->email)->exists()) {
@@ -25,19 +28,20 @@ class OtpController extends Controller
             ], 409); // 409 Conflict
         }
 
-        // Cek OTP terakhir yang masih berlaku
+        $now = Carbon::now();
+
+        // Ambil OTP terakhir yang belum digunakan
         $existingOtp = Otp::where('email', $request->email)
             ->where('is_used', false)
             ->orderByDesc('created_at')
             ->first();
 
-        if ($existingOtp && $existingOtp->expires_at > Carbon::now()) {
-            // Hitung sisa waktu resend
-            $now = Carbon::now();
-            $expiresAt = Carbon::parse($existingOtp->expires_at);
-            $remainingSeconds = $now->diffInSeconds($expiresAt, false);
+        if ($existingOtp && $existingOtp->expires_at > $now) {
+            $lastSent = $existingOtp->created_at;
+            $canResendAt = $lastSent->addMinutes(1);
 
-            if ($remainingSeconds > 0) {
+            if ($now < $canResendAt) {
+                $remainingSeconds = $now->diffInSeconds($canResendAt);
                 $minutes = floor($remainingSeconds / 60);
                 $seconds = $remainingSeconds % 60;
 
@@ -45,22 +49,22 @@ class OtpController extends Controller
                     'message' => "OTP sudah dikirim. Anda dapat meminta ulang dalam {$minutes} menit {$seconds} detik.",
                 ], 429); // Too Many Requests
             }
+
+            // Jika bisa resend, expired-kan OTP lama
+            $existingOtp->update(['expires_at' => $now]);
         }
 
-        $otpCode = rand(100000, 999999); // 6 digit
+        // Buat OTP baru
+        $otpCode = rand(100000, 999999);
 
-        // Simpan OTP ke database
         Otp::create([
             'email' => $request->email,
             'code' => $otpCode,
-            'expires_at' => now()->addMinutes(5),
+            'expires_at' => $now->copy()->addMinutes(5),
             'is_used' => false,
-        ]);
+        ], );
 
-        // Ambil nama dari email jika tidak disediakan
         $name = $request->name ?? explode('@', $request->email)[0];
-
-        // Kirim email
         Mail::to($request->email)->send(new OtpMail($otpCode, $name));
 
         return response()->json(['message' => 'Kode OTP telah dikirim ke email']);
@@ -72,6 +76,8 @@ class OtpController extends Controller
         $request->validate([
             'email' => 'required|email',
             'code' => 'required|string',
+        ], [
+            'code.required' => "Kode OTP tidak boleh kosong"
         ]);
 
         $otp = Otp::where('email', $request->email)
