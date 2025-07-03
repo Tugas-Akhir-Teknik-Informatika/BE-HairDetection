@@ -24,7 +24,7 @@ class OtpController extends Controller
 
         if (User::where('email', $request->email)->exists()) {
             return response()->json([
-                'message' => 'Email sudah terdaftar. Silakan login.',
+                'message' => 'Email sudah terdaftar. Silakan masuk.',
             ], 409); // 409 Conflict
         }
 
