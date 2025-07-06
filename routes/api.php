@@ -6,6 +6,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PredictController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -22,4 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/photo', [UserController::class, 'updateProfilePhoto']);
     Route::post('/user', [UserController::class, 'update']);
     Route::post('/user/changePassword', [UserController::class, 'changePassword']);
+    Route::post('/predict', [PredictController::class, 'store']);
+    Route::get('/histories', [PredictController::class, 'index']);
+    Route::get('/latest-history', [PredictController::class, 'latestHistory']);
+
+
 });
