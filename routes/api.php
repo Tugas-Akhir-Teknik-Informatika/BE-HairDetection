@@ -29,3 +29,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 });
+
+Route::any('/check-method', function (Request $request) {
+    return response()->json([
+        'actual_method' => $request->method(),
+        'all_input'     => $request->all(),
+    ]);
+});
