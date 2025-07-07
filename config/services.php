@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'ml' => [
+        'endpoint' => env('ML_ENDPOINT'),
+    ],
+
 ];
