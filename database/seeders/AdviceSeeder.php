@@ -26,8 +26,8 @@ class AdviceSeeder extends Seeder
             ],
             [
                 'prediction' => 'Folliculitis',
-                'result' => 'Rambut Tampak Rusak',
-                'description' => 'Gawat! Rambutmu tampak rusak disebabkan oleh penyakit Folliculitis. Folliculitis adalah infeksi atau peradangan pada folikel rambut, bisa berupa benjolan merah, bernanah, dan terasa gatal atau sakit.',
+                'result' => 'Ditemukan Gejala Kerusakan Rambut',
+                'description' => 'Rambutmu menunjukkan gejala kerusakan akibat Folliculitis. Folliculitis adalah infeksi atau peradangan pada folikel rambut yang dapat menimbulkan benjolan merah, nanah, rasa gatal, atau nyeri. Jika tidak ditangani, kondisi ini bisa memperparah kerusakan rambut.',
                 'advice' => [
                     'Jaga kebersihan kulit kepala.',
                     'Kompres hangat.',
@@ -42,8 +42,8 @@ class AdviceSeeder extends Seeder
             [
 
                 'prediction' => 'Lichen Planopilaris',
-                'result' => 'Rambut Tampak Rusak',
-                'description' => 'Gawat! Rambutmu tampak rusak disebabkan oleh penyakit Lichen Planopilaris (LPP). LPP adalah kondisi autoimun/peradangan yang menyebabkan kerontokan rambut permanen karena luka jaringan parut, disertai rasa gatal atau terbakar.',
+                'result' => 'Ditemukan Gejala Kerusakan Rambut',
+                'description' => 'Rambutmu menunjukkan gejala kerusakan yang mengarah pada kondisi Lichen Planopilaris (LPP). LPP adalah penyakit autoimun yang menyebabkan peradangan pada folikel rambut, mengakibatkan kerontokan permanen akibat terbentuknya jaringan parut, disertai rasa gatal atau terbakar.',
                 'advice' => [
                     'Konsumsi obat anti-inflamasi atau obat anti radang.',
                     'Terapi adisional.',
@@ -54,8 +54,8 @@ class AdviceSeeder extends Seeder
             [
 
                 'prediction' => 'Psoriasis',
-                'result' => 'Rambut Tampak Rusak',
-                'description' => 'Gawat! Rambutmu tampak rusak disebabkan oleh penyakit Psoriasis. Psoriasis adalah kondisi autoimun yang menyebabkan peningkatan pergantian sel kulit secara cepat dan menumpuk di permukaan sehingga timbul bercak merah, sisik tebal, gatal dan dapat menyebabkan rambut rontok sementara.',
+                'result' => 'Ditemukan Gejala Kerusakan Rambut',
+                'description' => 'Rambutmu menunjukkan gejala kerusakan yang disebabkan oleh Psoriasis. Psoriasis adalah kondisi autoimun yang mempercepat regenerasi sel kulit, menyebabkan penumpukan di permukaan kulit kepala. Gejalanya meliputi bercak merah, sisik tebal, rasa gatal, dan dapat menyebabkan kerontokan rambut sementara.',
                 'advice' => [
                     'Jaga kebersihan kulit kepala.',
                     'Hindari menggaruk area terinfeksi.',
@@ -69,7 +69,7 @@ class AdviceSeeder extends Seeder
             ],
             [
                 'prediction' => 'Rusak',
-                'result' => 'Rambut Tampak Rusak',
+                'result' => 'Ditemukan Gejala Kerusakan Rambut',
                 'description' => 'Gawat! Rambutmu tampak rusak. Ini bisa terjadi karena terlalu sering styling, penggunaan bahan kimia, atau cara menyisir yang salah.',
                 'advice' => [
                     'Jaga kelembapan rambut. Gunakan masker rambut seminggu sekali, minyak alami , dan kondisioner.',

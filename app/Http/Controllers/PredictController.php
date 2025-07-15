@@ -123,4 +123,21 @@ class PredictController extends Controller
             'history' => $latest?->load('advice'),
         ], 200);
     }
+
+    /* ──────────────────────────────── latestTwoHistories() ──────────────────────────────── */
+    public function latestTwoHistories(Request $request)
+    {
+        $user = $request->user();
+
+        $histories = History::with('advice')
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(2)
+            ->get();
+
+        return response()->json([
+            'message'   => $histories->isNotEmpty() ? '2 histori terakhir berhasil ditampilkan.' : 'Belum ada histori.',
+            'histories' => $histories,
+        ], 200);
+    }
 }

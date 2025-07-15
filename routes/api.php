@@ -26,8 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/predict', [PredictController::class, 'store']);
     Route::get('/histories', [PredictController::class, 'index']);
     Route::get('/latest-history', [PredictController::class, 'latestHistory']);
-
-
+    Route::get('/latest-two', [PredictController::class, 'latestTwoHistories']);
 });
 
 Route::any('/check-method', function (Request $request) {
